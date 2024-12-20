@@ -1,5 +1,4 @@
 <?php
-// src/Entity/Ride.php
 namespace App\Entity;
 
 use App\Enum\RideStatus;

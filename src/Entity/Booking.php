@@ -1,5 +1,4 @@
 <?php
-// src/Entity/Booking.php
 namespace App\Entity;
 
 use App\Enum\BookingStatus;

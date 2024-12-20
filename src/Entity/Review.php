@@ -1,5 +1,4 @@
 <?php
-// src/Entity/Review.php
 namespace App\Entity;
 
 use App\Repository\ReviewRepository;
