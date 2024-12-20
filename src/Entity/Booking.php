@@ -26,6 +26,17 @@ class Booking
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $totalPrice = null;
 
+
+
+    #[ORM\ManyToOne(targetEntity: Ride::class, inversedBy: 'bookings')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Ride $ride = null;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'bookings')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $passenger = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,6 +75,26 @@ class Booking
     public function setTotalPrice(?string $totalPrice): void
     {
         $this->totalPrice = $totalPrice;
+    }
+
+    public function getRide(): ?Ride
+    {
+        return $this->ride;
+    }
+
+    public function setRide(?Ride $ride): void
+    {
+        $this->ride = $ride;
+    }
+
+    public function getPassenger(): ?User
+    {
+        return $this->passenger;
+    }
+
+    public function setPassenger(?User $passenger): void
+    {
+        $this->passenger = $passenger;
     }
 
 

@@ -6,6 +6,8 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -40,11 +42,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
+    #[ORM\OneToMany(mappedBy: 'driver', targetEntity: Ride::class)]
+    private Collection $rides;
 
+    #[ORM\OneToMany(mappedBy: 'passenger', targetEntity: Booking::class)]
+    private Collection $bookings;
+
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: Message::class)]
+    private Collection $sentMessages;
+
+    #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: Message::class)]
+    private Collection $receivedMessages;
 
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
+
+        $this->rides = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
+        $this->sentMessages = new ArrayCollection();
+        $this->receivedMessages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -174,6 +191,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->isVerified = $isVerified;
         return $this;
+    }
+
+    public function getRides(): Collection
+    {
+        return $this->rides;
+    }
+
+    public function setRides(Collection $rides): void
+    {
+        $this->rides = $rides;
+    }
+
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function setBookings(Collection $bookings): void
+    {
+        $this->bookings = $bookings;
+    }
+
+    public function getSentMessages(): Collection
+    {
+        return $this->sentMessages;
+    }
+
+    public function setSentMessages(Collection $sentMessages): void
+    {
+        $this->sentMessages = $sentMessages;
+    }
+
+    public function getReceivedMessages(): Collection
+    {
+        return $this->receivedMessages;
+    }
+
+    public function setReceivedMessages(Collection $receivedMessages): void
+    {
+        $this->receivedMessages = $receivedMessages;
     }
 
 

@@ -21,6 +21,18 @@ class Review
     #[ORM\Column(type: Types::TEXT)]
     private ?string $comment = null;
 
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $reviewer = null;
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $reviewed = null;
+
+    #[ORM\ManyToOne(targetEntity: Ride::class, inversedBy: 'reviews')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Ride $ride = null;
     public function getId(): ?int
     {
         return $this->id;
@@ -49,6 +61,36 @@ class Review
     public function setComment(?string $comment): void
     {
         $this->comment = $comment;
+    }
+
+    public function getReviewer(): ?User
+    {
+        return $this->reviewer;
+    }
+
+    public function setReviewer(?User $reviewer): void
+    {
+        $this->reviewer = $reviewer;
+    }
+
+    public function getReviewed(): ?User
+    {
+        return $this->reviewed;
+    }
+
+    public function setReviewed(?User $reviewed): void
+    {
+        $this->reviewed = $reviewed;
+    }
+
+    public function getRide(): ?Ride
+    {
+        return $this->ride;
+    }
+
+    public function setRide(?Ride $ride): void
+    {
+        $this->ride = $ride;
     }
 
 

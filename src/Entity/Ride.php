@@ -48,8 +48,23 @@ class Ride
     #[ORM\Column]
     private ?bool $isActive = true;
 
+    #[ORM\OneToMany(mappedBy: 'ride', targetEntity: Booking::class)]
+    private Collection $bookings;
+
+    #[ORM\OneToMany(mappedBy: 'ride', targetEntity: Review::class)]
+    private Collection $reviews;
+
+    #[ORM\OneToMany(mappedBy: 'ride', targetEntity: Message::class)]
+    private Collection $messages;
 
 
+
+    public function __construct()
+    {
+        $this->bookings = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
+        $this->messages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -159,6 +174,36 @@ class Ride
     public function setIsActive(?bool $isActive): void
     {
         $this->isActive = $isActive;
+    }
+
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function setBookings(Collection $bookings): void
+    {
+        $this->bookings = $bookings;
+    }
+
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function setReviews(Collection $reviews): void
+    {
+        $this->reviews = $reviews;
+    }
+
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function setMessages(Collection $messages): void
+    {
+        $this->messages = $messages;
     }
 
 
