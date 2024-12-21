@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\MailerInterface;
 use App\Entity\Ride;
 use App\Form\RideType;
 use App\Repository\UserRepository;
@@ -22,10 +24,13 @@ class RideController extends AbstractController
     private $entityManager;
     private $userRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, UserRepository $userRepository)
+    private $mailer;
+ 
+    public function __construct(EntityManagerInterface $entityManager, UserRepository $userRepository,MailerInterface $mailer)
     {
         $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
+        $this->mailer = $mailer;
     }
 
 
@@ -123,7 +128,15 @@ class RideController extends AbstractController
     {
         $booking->setStatus(BookingStatus::CONFIRMED);
         $entityManager->flush();
+        $email = (new Email())
+            ->from('chahinjawadi@gmail.com')
+            ->to($booking->getPassenger()->getEmail())  
+            ->subject('Votre réservation a été confirmée')
+            ->html('<p>Bonjour ' . $booking->getPassenger()->getFirstName() . ',</p>
+                <p>Nous sommes heureux de vous informer que votre réservation pour le trajet ' . $booking->getRide()->getDepartureCity() . ' → ' . $booking->getRide()->getArrivalCity() . ' a été confirmée.</p>
+                <p>Merci de voyager avec nous !</p>');
 
+        $this->mailer->send($email); 
         $this->addFlash('success', 'Réservation confirmée avec succès.');
         return $this->redirectToRoute('driver_bookings');
     }
@@ -149,7 +162,7 @@ class RideController extends AbstractController
     #[Route('/user/bookings', name: 'user_bookings')]
     public function userBookings(BookingRepository $bookingRepository): Response
     {
-        $passenger = $this->getUser();  
+        $passenger = $this->getUser();
         $bookings = $bookingRepository->findBy(['passenger' => $passenger]);
 
         return $this->render('booking/user_bookings.html.twig', [
