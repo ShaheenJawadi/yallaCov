@@ -146,5 +146,14 @@ class RideController extends AbstractController
 
 
 
-    
+    #[Route('/user/bookings', name: 'user_bookings')]
+    public function userBookings(BookingRepository $bookingRepository): Response
+    {
+        $passenger = $this->getUser();  
+        $bookings = $bookingRepository->findBy(['passenger' => $passenger]);
+
+        return $this->render('booking/user_bookings.html.twig', [
+            'bookings' => $bookings,
+        ]);
+    }
 }

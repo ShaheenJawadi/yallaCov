@@ -1,39 +1,72 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h1>Gestion des Réservations</h1>
+    <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="display-6">Gestion des Réservations</h1>
+        </div>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Passager</th>
-                    <th>Trajet</th>
-                    <th>Sièges Réservés</th>
-                    <th>Prix Total</th>
-                    <th>Statut</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for booking in bookings %}
-                    <tr>
-                        <td>{{ booking.id }}</td>
-                        <td>{{ booking.passenger.firstName }} {{ booking.passenger.lastName }}</td>
-                        <td>{{ booking.ride.departureCity }} → {{ booking.ride.arrivalCity }}</td>
-                        <td>{{ booking.seatsBooked }}</td>
-                        <td>{{ booking.totalPrice }} TND</td>
-                        <td>{{ booking.status.value }}</td>
-                        <td>
-                            {% if booking.status.value == 'pending' %}
-                                <a href="{{ path('booking_confirm', {id: booking.id}) }}" class="btn btn-success btn-sm">Confirmer</a>
-                                <a href="{{ path('booking_reject', {id: booking.id}) }}" class="btn btn-danger btn-sm">Rejeter</a>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        {% if bookings|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle shadow-sm">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Passager</th>
+                            <th>Trajet</th>
+                            <th>Sièges Réservés</th>
+                            <th>Prix Total</th>
+                            <th>Statut</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in bookings %}
+                            <tr>
+                                <td><strong>{{ booking.id }}</strong></td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ asset('images/user-avatar.png') }}" alt="Avatar" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+                                        <span>{{ booking.passenger.firstName }} {{ booking.passenger.lastName }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="text-primary">{{ booking.ride.departureCity }}</span>
+                                    → 
+                                    <span class="text-success">{{ booking.ride.arrivalCity }}</span>
+                                </td>
+                                <td>{{ booking.seatsBooked }}</td>
+                                <td><strong>{{ booking.totalPrice }} TND</strong></td>
+                                <td>
+                                    {% if booking.status.value == 'confirmed' %}
+                                        <span class="badge bg-success">Confirmée</span>
+                                    {% elseif booking.status.value == 'rejected' %}
+                                        <span class="badge bg-danger">Rejetée</span>
+                                    {% else %}
+                                        <span class="badge bg-warning text-dark">En Attente</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    {% if booking.status.value == 'pending' %}
+                                        <a href="{{ path('booking_confirm', {id: booking.id}) }}" class="btn btn-sm btn-success me-2">
+                                            <i class="fas fa-check"></i> Confirmer
+                                        </a>
+                                        <a href="{{ path('booking_reject', {id: booking.id}) }}" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-times"></i> Rejeter
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted">Aucune action</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="alert alert-info text-center">
+                <strong>Aucune réservation trouvée.</strong>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

@@ -335,3 +335,5 @@ font-size: 18px;
     flex-direction: column;
     gap: 15px;
 }
+
+.table-dark{    --bs-table-bg: #102585;}

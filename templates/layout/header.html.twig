@@ -21,9 +21,9 @@
                                 {{ app.user.firstName ~ ' ' ~ app.user.lastName }}
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                                {% if is_granted('ROLE_DRIVER') %}
-                                    <li><a class="dropdown-item" href="{{ path('driver_bookings') }}">Mes Réservations</a></li>
-                                    <li><a class="dropdown-item" href="{{ path('driver_bookings') }}">Mes Trajets</a></li>
+                                {% if is_granted('ROLE_DRIVER') %} 
+								  
+                                    <li><a class="dropdown-item" href="{{ path('driver_bookings') }}">Mes Réservations</a></li> 
                                     <li><a class="dropdown-item" href="{{ path('app_new_ride') }}">Ajouter un Trajet</a></li>
                                 {% endif %}
                                 {% if is_granted('ROLE_CLIENT') %}

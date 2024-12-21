@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1 class="mb-4 text-center">Historique des Réservations</h1>
+
+        {% if bookings|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Trajet</th>
+                            <th>Sièges Réservés</th>
+                            <th>Prix Total</th>
+                            <th>Statut</th>
+                            <th>Date de Réservation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in bookings %}
+                            <tr>
+                                <td><strong>{{ booking.id }}</strong></td>
+                                <td>
+                                    <span class="text-primary">{{ booking.ride.departureCity }}</span> 
+                                    → 
+                                    <span class="text-success">{{ booking.ride.arrivalCity }}</span>
+                                </td>
+                                <td>{{ booking.seatsBooked }}</td>
+                                <td>
+                                    <strong>{{ booking.totalPrice }} TND</strong>
+                                </td>
+                                <td>
+                                    {% if booking.status.value == 'CONFIRMED' %}
+                                        <span class="badge bg-success">Confirmée</span>
+                                    {% elseif booking.status.value == 'REJECTED' %}
+                                        <span class="badge bg-danger">Rejetée</span>
+                                    {% else %}
+                                        <span class="badge bg-warning text-dark">En Attente</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ booking.createdAt|date('d/m/Y H:i') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="alert alert-info text-center">
+                Vous n'avez aucune réservation pour le moment.
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

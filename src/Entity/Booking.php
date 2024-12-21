@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entity;
 
 use App\Enum\BookingStatus;
@@ -36,6 +37,8 @@ class Booking
     #[ORM\JoinColumn(nullable: false)]
     private ?User $passenger = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $createdAt = null;
 
     public function getId(): ?int
     {
@@ -97,6 +100,21 @@ class Booking
         $this->passenger = $passenger;
     }
 
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
 
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
+        return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTime();
+    }
 }
