@@ -16,64 +16,50 @@
 				</div>
 
 				<div class="col-md-6">
-					<div class="heroSearchBox">
-						<div class="boxWrapper" >
-							<div class="tit">Vous recherchez un covoiturage ?</div>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Lieu de départ:</label>
-										<select class="form-control form-select-lg">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Lieu de destination:</label>
-										<select class="form-control form-select-lg">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</div>
-								</div>
+    <div class="heroSearchBox">
+        <div class="boxWrapper">
+            <div class="tit">Vous recherchez un covoiturage ?</div>
+            <form method="get" action="{{ path('app_ride_listing') }}">
+                <div class="row">
+                    <!-- Departure City -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="departureCitySearch">Lieu de départ:</label>
+                            <input type="text" id="departureCitySearch" name="departureCity" class="form-control form-select-lg" placeholder="Ex: Tunis">
+                        </div>
+                    </div>
+                    <!-- Arrival City -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="arrivalCitySearch">Lieu de destination:</label>
+                            <input type="text" id="arrivalCitySearch" name="arrivalCity" class="form-control form-select-lg" placeholder="Ex: Sousse">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Departure Date -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="departureDateSearch">Date de départ:</label>
+                            <input type="date" id="departureDateSearch" name="departureDate" class="form-control">
+                        </div>
+                    </div>
+                    <!-- Departure Time -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="departureTimeSearch">Temps de départ:</label>
+                            <input type="time" id="departureTimeSearch" name="departureTime" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="btnHolder">
+                    <button type="submit" class="btn btn-primary w-100">Recherche</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-                                
-                               
-									<div class="form-group">
-										<label>Date de départ:</label>
-										<input type="date"   class="  form-control">
-									</div>
-								 
-                                
-                                </div>
-                                <div class="col-md-6">
-                                
-                               
-									<div class="form-group">
-										<label>Temps de départ:</label>
-										<input type="time"   class="  form-control">
-									</div>
-								 
-                                
-                                </div>
-								 
-
-							</div>
-                            <div class="btnHolder"><button type="button" class="btn btn-primary" >Recherche</button></div>
-						</div>
-					</div>
-				</div>
 
 			</div>
 		</div>

@@ -30,14 +30,14 @@ class RideRepository extends ServiceEntityRepository
 
         if ($departureDate) {
             $date = new \DateTime($departureDate);  
-            $qb->andWhere('r.departureDate = :departureDate')
+            $qb->andWhere('r.departureDate >=:departureDate')
                ->setParameter('departureDate', $date->format('Y-m-d'));  
         }
 
          
         if ($departureTime) {
             $time = \DateTime::createFromFormat('H:i', $departureTime);  
-            $qb->andWhere('r.departureTime = :departureTime')
+            $qb->andWhere('r.departureTime >= :departureTime')
                ->setParameter('departureTime', $time->format('H:i:s'));  
         }
 

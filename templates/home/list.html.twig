@@ -17,19 +17,19 @@
 					<form method="get" action="{{ path('app_ride_listing') }}">
 						<div class="mb-3">
 							<label for="departureCity" class="form-label">Ville de départ</label>
-							<input type="text" id="departureCity" name="departureCity" class="form-control" placeholder="Ex: Tunis">
+							<input type="text" id="departureCity" name="departureCity" class="form-control" placeholder="Ex: Tunis" value="{{ app.request.query.get('departureCity') }}">
 						</div>
 						<div class="mb-3">
 							<label for="arrivalCity" class="form-label">Ville d'arrivée</label>
-							<input type="text" id="arrivalCity" name="arrivalCity" class="form-control" placeholder="Ex: Sousse">
+							<input type="text" id="arrivalCity" name="arrivalCity" class="form-control" placeholder="Ex: Sousse" value="{{ app.request.query.get('arrivalCity') }}">
 						</div>
 						<div class="mb-3">
 							<label for="departureDate" class="form-label">Date de départ</label>
-							<input type="date" id="departureDate" name="departureDate" class="form-control">
+							<input type="date" id="departureDate" name="departureDate" class="form-control" value="{{ app.request.query.get('departureDate') }}">
 						</div>
 						<div class="mb-3">
 							<label for="departureTime" class="form-label">Heure de départ</label>
-							<input type="time" id="departureTime" name="departureTime" class="form-control">
+							<input type="time" id="departureTime" name="departureTime" class="form-control" value="{{ app.request.query.get('departureTime') }}">
 						</div>
 						<button type="submit" class="btn btn-primary w-100">Filtrer</button>
 					</form>
@@ -102,8 +102,9 @@
 											</div>
 											<form action="{{ path('ride_book', { id: ride.id }) }}" method="POST">
 												<div class="modal-body">
-												<div class="mb-3">
-														<p> {{ ride.additionalNotes}}</p>
+													<div class="mb-3">
+														<p>
+															{{ ride.additionalNotes}}</p>
 													</div>
 													<div class="mb-3">
 														<label for="seatsBooked{{ ride.id }}" class="form-label">Nombre de sièges à réserver</label>
