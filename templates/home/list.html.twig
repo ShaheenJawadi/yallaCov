@@ -47,7 +47,6 @@
 							{% for ride in rides %}
 								<div class="single-item mb30">
 									<div class="d-img">
-
 										<img src="{{ asset('images/car.jpg') }}" class="img-fluid" alt="">
 									</div>
 									<div class="d-info">
@@ -59,29 +58,21 @@
 													<li>
 														<span>Sièges:</span>
 														4</li>
-
 													<li>
 														<span>Sièges disponibles:</span>
 														{{ ride.availableSeats }}</li>
-
 													<li>
 														<span>Ville de départ:</span>
 														{{ ride.departureCity }}</li>
-
-
 													<li>
 														<span>Ville d'arrivée:</span>
 														{{ ride.arrivalCity }}</li>
-
 													<li>
 														<span>Date de départ:</span>
 														{{ ride.departureDate|date('d/m/Y') }}</li>
-
-
 													<li>
 														<span>Heure de départ:</span>
 														{{ ride.departureTime|date('H:i') }}</li>
-
 													<li>
 														<span>Statut:</span>
 														{{ ride.status.value }}</li>
@@ -94,11 +85,48 @@
 										<span>{{ ride.pricePerSeat }}
 											TND</span>
 
-										<a class="btn btn-outline-primary">Réserver maintenant</a>
+										<!-- "Réserver maintenant" button -->
+										<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#bookingModal{{ ride.id }}">
+											Réserver maintenant
+										</button>
 									</div>
 									<div class="clearfix"></div>
 								</div>
+
+								<div class="modal fade" id="bookingModal{{ ride.id }}" tabindex="-1" aria-labelledby="bookingModalLabel{{ ride.id }}" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="bookingModalLabel{{ ride.id }}">Confirmer la réservation</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<form action="{{ path('ride_book', { id: ride.id }) }}" method="POST">
+												<div class="modal-body">
+												<div class="mb-3">
+														<p> {{ ride.additionalNotes}}</p>
+													</div>
+													<div class="mb-3">
+														<label for="seatsBooked{{ ride.id }}" class="form-label">Nombre de sièges à réserver</label>
+														<input type="number" id="seatsBooked{{ ride.id }}" name="seatsBooked" class="form-control" min="1" max="{{ ride.availableSeats }}" required>
+													</div>
+													<p>
+														Prix total:
+														<span id="totalPrice{{ ride.id }}" data-price-per-seat="{{ ride.pricePerSeat }}">
+															{{ ride.pricePerSeat }}
+															TND
+														</span>
+													</p>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+													<button type="submit" class="btn btn-primary">Confirmer</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
 							{% endfor %}
+
 
 						</div>
 					{% endif %}
@@ -107,4 +135,18 @@
 		</div>
 
 	</div>
+
+	<script>
+		document.querySelectorAll('[id^="seatsBooked"]').forEach(function (input) {
+input.addEventListener('input', function () {
+const rideId = this.id.replace('seatsBooked', '');
+const pricePerSeat = parseFloat(document.querySelector (`#totalPrice${rideId}`).dataset.pricePerSeat);
+const seatsBooked = parseInt(this.value) || 0;
+const totalPrice = (pricePerSeat * seatsBooked).toFixed(2);
+document.querySelector (`#totalPrice${rideId}`).textContent = `${totalPrice} TND`;
+});
+});
+	</script>
+
+
 {% endblock %}
