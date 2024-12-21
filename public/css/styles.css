@@ -224,3 +224,12 @@ font-size: 18px;
     align-self: flex-end;
     text-align: end;
 }
+
+
+
+/* ///////////////////// */
+.fullPage{
+    height: calc(100vh - 75px);
+    display: flex;
+    align-items: center;
+}

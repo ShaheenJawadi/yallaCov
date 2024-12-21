@@ -3,9 +3,9 @@
 	<div class="container">
 
 		<div class="headerWrapper">
-			<div class="logoHolder">
+			<a href="{{ path('app_home') }}" class="logoHolder">
 				<img src="{{ asset('images/logo.svg') }}" alt="">
-			</div>
+			</a>
 			<div class="headerNavs">
 				<div class="navTitles">
 
@@ -17,7 +17,7 @@
 
 				</div>
 				<div class="authSection">
-					<a href="http://" class="btn btn-outline-secondary">Se connecter</a>
+					<a href="{{ path('app_login') }}" class="btn btn-outline-secondary">Se connecter</a>
 
 					<a class="btn btn-primary" href="http://">S'inscrire</a>
 				</div>
