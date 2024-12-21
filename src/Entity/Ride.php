@@ -27,8 +27,13 @@ class Ride
     #[ORM\Column(length: 255)]
     private ?string $arrivalCity = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $departureTime = null;
+    
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $departureTime = null;   
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $departureDate = null;   
+
 
     #[ORM\Column]
     private ?int $availableSeats = null;
@@ -114,6 +119,16 @@ class Ride
     public function setDepartureTime(?\DateTimeInterface $departureTime): void
     {
         $this->departureTime = $departureTime;
+    }
+
+    public function getDepartureDate(): ?\DateTimeInterface
+    {
+        return $this->departureDate;
+    }
+
+    public function setDepartureDate(?\DateTimeInterface $departureDate): void
+    {
+        $this->departureDate = $departureDate;
     }
 
     public function getAvailableSeats(): ?int
