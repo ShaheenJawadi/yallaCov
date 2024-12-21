@@ -1,0 +1,151 @@
+
+:root {
+    --primary-color: #2BD42B;
+    --secondary-color: #FFF634;
+    --success-color: #05b000;
+    --info-color: #3498db;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --light-color: #ecf0f1;
+    --dark-color: #384FBB;
+    --primary-dark: hsl(146, 40%, 40%);
+    --primary-light: hsl(146, 40%, 60%);
+    --header-bg:#102585;
+}
+ 
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+.btn-outline-secondary{
+   color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-info {
+    background-color: var(--info-color);
+    border-color: var(--info-color);
+}
+
+.btn-success {
+    background-color: var(--primary-light);
+    border-color: var(--primary-light);
+}
+
+.btn-warning {
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+ 
+.navbar {
+    background-color: var(--primary-color);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--light-color);
+}
+
+/* Alerts */
+.alert-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+
+.alert-info {
+    background-color: var(--info-color);
+    color: #fff;
+}
+
+.alert-warning {
+    background-color: var(--warning-color);
+    color: #fff;
+}
+
+.alert-danger {
+    background-color: var(--danger-color);
+    color: #fff;
+}
+
+.progress-bar {
+    background-color: var(--primary-color);
+}
+
+.footer {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    max-width: 100vw;
+    overflow: auto;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* header */
+
+header {
+    background: var(--header-bg);
+    color: #fff;
+}
+header .headerWrapper{
+    display: flex;
+    padding: 10px; 
+    gap: 25px;
+}
+
+header .headerWrapper .logoHolder{
+    width: 150px;
+}
+
+header .headerWrapper  .headerNavs{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header .headerWrapper  .headerNavs .navTitles{
+    display: flex;
+    gap: 15px;
+}
+header .headerWrapper  .headerNavs .navTitles a {
+display: block;
+font-weight: 600;
+color: #fff;
+font-size: 18px;
+}

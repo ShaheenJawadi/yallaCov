@@ -27,4 +27,4 @@
 
 .env
 /.idea
-
+/migrations 
