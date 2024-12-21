@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+	<div class="listPageWrapper">
+		<div class="banner">
+			<div>Trouvez votre destination
+			</div>
+		</div>
+
+		<div class="container mt-4">
+			<div class="row">
+
+				<div class="col-md-3">
+					<h5>Filtres</h5>
+					<form method="get" action="{{ path('app_ride_listing') }}">
+						<div class="mb-3">
+							<label for="departureCity" class="form-label">Ville de départ</label>
+							<input type="text" id="departureCity" name="departureCity" class="form-control" placeholder="Ex: Tunis">
+						</div>
+						<div class="mb-3">
+							<label for="arrivalCity" class="form-label">Ville d'arrivée</label>
+							<input type="text" id="arrivalCity" name="arrivalCity" class="form-control" placeholder="Ex: Sousse">
+						</div>
+						<div class="mb-3">
+							<label for="departureDate" class="form-label">Date de départ</label>
+							<input type="date" id="departureDate" name="departureDate" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label for="departureTime" class="form-label">Heure de départ</label>
+							<input type="time" id="departureTime" name="departureTime" class="form-control">
+						</div>
+						<button type="submit" class="btn btn-primary w-100">Filtrer</button>
+					</form>
+				</div>
+
+
+				<div class="col-md-9">
+
+
+					<h5>Liste des trajets</h5>
+					{% if rides is empty %}
+						<p>Aucun trajet trouvé.</p>
+					{% else %}
+						<div class="list-group">
+							{% for ride in rides %}
+								<div class="single-item mb30">
+									<div class="d-img">
+
+										<img src="{{ asset('images/car.jpg') }}" class="img-fluid" alt="">
+									</div>
+									<div class="d-info">
+										<div class="d-text">
+											<h4>{{ ride.driver.firstName ~ ' ' ~ ride.driver.lastName }}</h4>
+
+											<div class="d-atr-group">
+												<ul class="d-atr">
+													<li>
+														<span>Sièges:</span>
+														4</li>
+
+													<li>
+														<span>Sièges disponibles:</span>
+														{{ ride.availableSeats }}</li>
+
+													<li>
+														<span>Ville de départ:</span>
+														{{ ride.departureCity }}</li>
+
+
+													<li>
+														<span>Ville d'arrivée:</span>
+														{{ ride.arrivalCity }}</li>
+
+													<li>
+														<span>Date de départ:</span>
+														{{ ride.departureDate|date('d/m/Y') }}</li>
+
+
+													<li>
+														<span>Heure de départ:</span>
+														{{ ride.departureTime|date('H:i') }}</li>
+
+													<li>
+														<span>Statut:</span>
+														{{ ride.status.value }}</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="d-price">
+										Frais
+										<span>{{ ride.pricePerSeat }}
+											TND</span>
+
+										<a class="btn btn-outline-primary">Réserver maintenant</a>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							{% endfor %}
+
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+	</div>
+{% endblock %}

@@ -233,3 +233,93 @@ font-size: 18px;
     display: flex;
     align-items: center;
 }
+ 
+.listPageWrapper{ 
+}
+.listPageWrapper .banner{
+    background: url(../images/banner.webp) no-repeat center center/cover;
+    height: calc(100vh - 75px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    height: 250px;
+    font-size: 30px;
+    font-weight: 700;
+    text-shadow: 4px 1px black;
+}
+
+
+
+
+
+
+
+
+.single-item {
+    display: table;
+    padding: 20px;
+    background: #ffffff;
+    border: solid 1px #dddddd;
+    box-shadow: 3px 3px 9px rgba(164,164,186,0.2);
+    border-radius:6px;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+}
+
+.single-item .d-img, .single-item .d-info, .single-item .d-price{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.single-item .d-img{
+    width:30%;
+}
+
+.single-item img{
+    border-radius:6px;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    box-shadow: 3px 3px 9px rgba(164,164,186,.5);
+    height: 200px;
+} 
+
+.single-item .d-info{
+    width:40%;
+    padding-left: 30px;
+}
+
+.single-item .d-price{
+    width:30%;
+    padding-left: 30px;
+    text-align: center;
+}
+.single-item .d-price span{
+    display: block;
+    font-weight: bold;
+    font-size: 28px;
+    margin-bottom:10px;
+    color:#222733;
+}
+
+.single-item .d-info img{
+    width: 32px;
+    height: 32px;
+}
+
+.single-item .d-info ul{
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    list-style: none;
+    padding: 0;
+}
+
+.single-item .d-info ul li{
+    font-size: 14px;
+}
+
+.single-item .d-info ul li span{
+    font-weight: 600;
+    margin-right: 10px;
+}
