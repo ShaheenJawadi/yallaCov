@@ -122,6 +122,14 @@ a {
 header {
     background: var(--header-bg);
     color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 75px;
+    margin: auto;
+    display: flex;
+    align-items: center;
 }
 header .headerWrapper{
     display: flex;
@@ -148,4 +156,37 @@ display: block;
 font-weight: 600;
 color: #fff;
 font-size: 18px;
+}
+
+
+
+
+
+
+
+
+/* ///////////// */
+
+.contentWrapper{
+    margin-top: 75px;
+}
+.contentWrapper .homeHero{
+    background: url(../images/hero/b2.jpg) no-repeat center center/cover;
+    height: calc(100vh - 75px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center; 
+}
+
+.contentWrapper .homeHero .heroText{
+    text-align: left;
+    text-shadow: 2px 2px 2px #1a1515d1;
+}
+
+.contentWrapper .homeHero .heroText p {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 20px;
 }
