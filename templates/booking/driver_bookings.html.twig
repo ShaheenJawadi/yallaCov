@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Gestion des Réservations</h1>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Passager</th>
+                    <th>Trajet</th>
+                    <th>Sièges Réservés</th>
+                    <th>Prix Total</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.id }}</td>
+                        <td>{{ booking.passenger.firstName }} {{ booking.passenger.lastName }}</td>
+                        <td>{{ booking.ride.departureCity }} → {{ booking.ride.arrivalCity }}</td>
+                        <td>{{ booking.seatsBooked }}</td>
+                        <td>{{ booking.totalPrice }} TND</td>
+                        <td>{{ booking.status.value }}</td>
+                        <td>
+                            {% if booking.status.value == 'pending' %}
+                                <a href="{{ path('booking_confirm', {id: booking.id}) }}" class="btn btn-success btn-sm">Confirmer</a>
+                                <a href="{{ path('booking_reject', {id: booking.id}) }}" class="btn btn-danger btn-sm">Rejeter</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
