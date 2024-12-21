@@ -42,23 +42,8 @@ class RideType extends AbstractType
             ])
             ->add('vehicleDescription', TextareaType::class, [
                 'label' => 'Description du véhicule',
-            ])
-            ->add('status', ChoiceType::class, [
-                'label' => 'Statut',
-                'choices' => [
-                    'En attente' => RideStatus::PENDING,
-                    'Confirmé' => RideStatus::COMPLETED,
-                    'Annulé' => RideStatus::CANCELLED,
-                ],
-            ])
-            ->add('isActive', ChoiceType::class, [
-                'label' => 'Actif',
-                'choices' => [
-                    'Oui' => true,
-                    'Non' => false,
-                ],
-                'expanded' => true,
             ]);
+           
     }
 
     public function configureOptions(OptionsResolver $resolver): void

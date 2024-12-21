@@ -129,7 +129,7 @@ class RideController extends AbstractController
         $booking->setStatus(BookingStatus::CONFIRMED);
         $entityManager->flush();
         $email = (new Email())
-            ->from('chahinjawadi@gmail.com')
+            ->from('24ce109d49-35052a+1@inbox.mailtrap.io')
             ->to($booking->getPassenger()->getEmail())  
             ->subject('Votre réservation a été confirmée')
             ->html('<p>Bonjour ' . $booking->getPassenger()->getFirstName() . ',</p>
