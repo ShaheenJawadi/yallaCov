@@ -226,7 +226,11 @@ font-size: 18px;
 }
 
 
-
+.authSection{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 /* ///////////////////// */
 .fullPage{
     min-height: calc(100vh - 75px);

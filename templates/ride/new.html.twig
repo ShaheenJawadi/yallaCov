@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="fullPage">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1 class="h3 mb-0">Ajouter un nouveau trajet</h1>
+                        </div>
+                        <div class="card-body">
+                            {{ form_start(form) }}
+                            <div class="mb-3">
+                                {{ form_row(form.departureCity, {
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_row(form.arrivalCity, {
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_row(form.departureDate, {
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_row(form.departureTime, {
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_row(form.availableSeats, {
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_row(form.pricePerSeat, {
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_row(form.vehicleDescription, {
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_row(form.status, {
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_row(form.isActive, {
+                                    'attr': {'class': 'form-check-input'}
+                                }) }}
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Ajouter le trajet</button>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
